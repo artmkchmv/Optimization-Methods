@@ -152,20 +152,14 @@ numerics::vector_f64 coord_descend(func_nd target_func, const numerics::vector_f
 		std::cout.rdbuf(temp_buf);
 		x_l = x_r;
 
-		if (std::abs(x_r[coord_id] - x_i) < 2 * eps) {
-			++opt_coord_n;
+		if (numerics::vector_f64::distance(x_l, x_r) < 2 * eps) {
+	
+			std::cout << "per coord_descend::probs : " << i + 1 << '\n';
 
-			if (opt_coord_n == x_r.size()) {
-
-				std::cout << "per coord_descend::probs : " << i + 1 << '\n';
-
-				return x_l;
-			}
-
-			continue;
+			return x_l;
 		}
 
-		opt_coord_n = 0;
+		x_l = x_r;
 	}
 
 	return x_l;
